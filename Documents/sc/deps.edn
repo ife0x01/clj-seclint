@@ -1,0 +1,8 @@
+{:paths ["src"]
+ :deps  {org.clojure/clojure {:mvn/version "1.11.1"}}
+ :aliases
+ {;; clojure -M:run src/
+  :run  {:main-opts ["-m" "seclint.core"]}
+  ;; clojure -M:test
+  :test {:extra-paths ["test" "examples"]
+         :main-opts   ["-m" "seclint.test-runner"]}}}

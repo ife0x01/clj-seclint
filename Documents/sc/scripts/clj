@@ -1,0 +1,13 @@
+#!/bin/sh
+# Run Clojure with ./src, ./test and ./examples on the classpath.
+# Works with the official Clojure CLI (deps.edn) and with the distro
+# `clojure` package (e.g. `sudo apt-get install clojure`).
+#
+#   sh scripts/clj -m seclint.core src/
+#   sh scripts/clj -m seclint.test-runner
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+if clojure -Sdescribe >/dev/null 2>&1; then
+  exec clojure -Sdeps "{:paths [\"$ROOT/src\" \"$ROOT/test\" \"$ROOT/examples\"]}" -M "$@"
+else
+  exec clojure -cp "$ROOT/src:$ROOT/test:$ROOT/examples" "$@"
+fi
